@@ -463,6 +463,7 @@ The Agency works natively with Claude Code, and ships conversion + install scrip
 - **[Cursor](https://cursor.sh)** — `.mdc` rule files → `.cursor/rules/`
 - **[Aider](https://aider.chat)** — single `CONVENTIONS.md` → `./CONVENTIONS.md`
 - **[Windsurf](https://codeium.com/windsurf)** — single `.windsurfrules` → `./.windsurfrules`
+- **[Trae](https://trae.ai)** — `.md` rule files → `.trae/rules/`
 - **[OpenClaw](https://github.com/openclaw/openclaw)** — `SOUL.md` + `AGENTS.md` + `IDENTITY.md` per agent
 
 ---
@@ -495,8 +496,9 @@ The installer scans your system for installed tools, shows a checkbox UI, and le
   [ ]  5)  [ ]  OpenCode        (opencode.ai)
   [ ]  6)  [ ]  OpenClaw        (~/.openclaw)
   [x]  7)  [*]  Cursor          (.cursor/rules)
-  [ ]  8)  [ ]  Aider           (CONVENTIONS.md)
-  [ ]  9)  [ ]  Windsurf        (.windsurfrules)
+  [x]  8)  [*]  Trae            (.trae/rules)
+  [ ]  9)  [ ]  Aider           (CONVENTIONS.md)
+  [ ]  10) [ ]  Windsurf        (.windsurfrules)
 
   [1-9] toggle   [a] all   [n] none   [d] detected
   [Enter] install   [q] quit
@@ -505,6 +507,7 @@ The installer scans your system for installed tools, shows a checkbox UI, and le
 **Or install a specific tool directly:**
 ```bash
 ./scripts/install.sh --tool cursor
+./scripts/install.sh --tool trae
 ./scripts/install.sh --tool opencode
 ./scripts/install.sh --tool openclaw
 ./scripts/install.sh --tool antigravity
@@ -607,6 +610,22 @@ See [integrations/opencode/README.md](integrations/opencode/README.md) for detai
 </details>
 
 <details>
+<summary><strong>Trae</strong></summary>
+
+Each agent becomes a `.md` rule file in `.trae/rules/` of your project (project-scoped) OR `~/.trae/rules/` (global-scoped).
+
+```bash
+# Install to current project
+cd /your/project
+/path/to/agency-agents/scripts/install.sh --tool trae
+```
+
+Trae automatically picks up these rules to guide AI behavior.
+
+See [integrations/trae/README.md](integrations/trae/README.md) for details.
+</details>
+
+<details>
 <summary><strong>Cursor</strong></summary>
 
 Each agent becomes a `.mdc` rule file in `.cursor/rules/` of your project.
@@ -692,7 +711,7 @@ When you add new agents or edit existing ones, regenerate all integration files:
 
 - [ ] Interactive agent selector web tool
 - [x] Multi-agent workflow examples -- see [examples/](examples/)
-- [x] Multi-tool integration scripts (Claude Code, GitHub Copilot, Antigravity, Gemini CLI, OpenCode, OpenClaw, Cursor, Aider, Windsurf)
+- [x] Multi-tool integration scripts (Claude Code, GitHub Copilot, Antigravity, Gemini CLI, OpenCode, OpenClaw, Cursor, Trae, Aider, Windsurf)
 - [ ] Video tutorials on agent design
 - [ ] Community agent marketplace
 - [ ] Agent "personality quiz" for project matching

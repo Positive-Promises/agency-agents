@@ -12,6 +12,7 @@ supported agentic coding tools.
 - **[OpenCode](#opencode)** — `.md` agent files in `opencode/`
 - **[OpenClaw](#openclaw)** — `SOUL.md` + `AGENTS.md` + `IDENTITY.md` workspaces
 - **[Cursor](#cursor)** — `.mdc` rule files in `cursor/`
+- **[Trae](#trae)** — `.md` rule files in `trae/`
 - **[Aider](#aider)** — `CONVENTIONS.md` in `aider/`
 - **[Windsurf](#windsurf)** — `.windsurfrules` in `windsurf/`
 
@@ -140,6 +141,18 @@ cd /your/project && /path/to/agency-agents/scripts/install.sh --tool cursor
 ```
 
 See [cursor/README.md](cursor/README.md) for details.
+
+---
+
+## Trae
+
+Each agent becomes a `.md` rule file. Rules are project-scoped or global-scoped.
+
+```bash
+cd /your/project && /path/to/agency-agents/scripts/install.sh --tool trae
+```
+
+See [trae/README.md](trae/README.md) for details.
 
 ---
 

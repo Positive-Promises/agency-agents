@@ -16,6 +16,7 @@
 #   cursor       — Cursor rule files (.cursor/rules/*.mdc)
 #   aider        — Single CONVENTIONS.md for Aider
 #   windsurf     — Single .windsurfrules for Windsurf
+#   trae         — Trae rules (.trae/rules/*.md)
 #   openclaw     — OpenClaw SOUL.md files (openclaw_workspace/<agent>/SOUL.md)
 #   all          — All tools (default)
 #
@@ -201,6 +202,27 @@ convert_cursor() {
 description: ${description}
 globs: ""
 alwaysApply: false
+---
+${body}
+HEREDOC
+}
+
+convert_trae() {
+  local file="$1"
+  local name description slug outfile body
+
+  name="$(get_field "name" "$file")"
+  description="$(get_field "description" "$file")"
+  slug="$(slugify "$name")"
+  body="$(get_body "$file")"
+
+  outfile="$OUT_DIR/trae/rules/${slug}.md"
+  mkdir -p "$OUT_DIR/trae/rules"
+
+  # Trae .md rules format: simple markdown with frontmatter
+  cat > "$outfile" <<HEREDOC
+---
+description: ${description}
 ---
 ${body}
 HEREDOC
@@ -392,6 +414,7 @@ run_conversions() {
         gemini-cli)  convert_gemini_cli  "$file" ;;
         opencode)    convert_opencode    "$file" ;;
         cursor)      convert_cursor      "$file" ;;
+        trae)        convert_trae        "$file" ;;
         openclaw)    convert_openclaw    "$file" ;;
         aider)       accumulate_aider    "$file" ;;
         windsurf)    accumulate_windsurf "$file" ;;
@@ -428,7 +451,7 @@ main() {
     esac
   done
 
-  local valid_tools=("antigravity" "gemini-cli" "opencode" "cursor" "aider" "windsurf" "openclaw" "all")
+  local valid_tools=("antigravity" "gemini-cli" "opencode" "cursor" "aider" "windsurf" "openclaw" "trae" "all")
   local valid=false
   for t in "${valid_tools[@]}"; do [[ "$t" == "$tool" ]] && valid=true && break; done
   if ! $valid; then
@@ -444,7 +467,7 @@ main() {
 
   local tools_to_run=()
   if [[ "$tool" == "all" ]]; then
-    tools_to_run=("antigravity" "gemini-cli" "opencode" "cursor" "aider" "windsurf" "openclaw")
+    tools_to_run=("antigravity" "gemini-cli" "opencode" "cursor" "aider" "windsurf" "openclaw" "trae")
   else
     tools_to_run=("$tool")
   fi
